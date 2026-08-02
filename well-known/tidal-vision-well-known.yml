@@ -1,0 +1,73 @@
+generated: '2026-08-02'
+method: probed
+source: live HTTP probes of the tidalvision.com web host
+host: https://tidalvision.com
+note: >-
+  Tidal Vision publishes no /.well-known/ discovery surface. Every well-known path
+  probed returns HTTP 301 to the site root, which is the WordPress soft-404 behaviour
+  for an unknown path — a confirmed absence rather than a block. The site root itself
+  sits behind a Cloudflare managed challenge (403 to non-browser clients), so paths
+  that are not redirected return 403 instead of a resolvable body. No api.*,
+  developer.*, docs.*, portal.*, status.* or trust.* subdomain resolves in DNS.
+documents:
+- path: /.well-known/security.txt
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/openid-configuration
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/oauth-authorization-server
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/oauth-protected-resource
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/api-catalog
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/ai-plugin.json
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/agent-card.json
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /.well-known/agent.json
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+- path: /llms.txt
+  status: 301
+  redirect: https://tidalvision.com/
+  found: false
+contract_discovery:
+  openapi:
+  - {url: 'https://tidalvision.com/openapi.json', status: 403, found: false}
+  - {url: 'https://tidalvision.com/swagger.json', status: 403, found: false}
+  - {url: 'https://tidalvision.com/api-docs', status: 403, found: false}
+  graphql:
+  - {url: 'https://tidalvision.com/graphql', status: 403, found: false}
+  asyncapi:
+  - {url: 'https://tidalvision.com/asyncapi.yaml', status: 403, found: false}
+  dns:
+  - {host: api.tidalvision.com, resolves: false}
+  - {host: developer.tidalvision.com, resolves: false}
+  - {host: docs.tidalvision.com, resolves: false}
+  - {host: portal.tidalvision.com, resolves: false}
+  - {host: status.tidalvision.com, resolves: false}
+  - {host: trust.tidalvision.com, resolves: false}
+  conclusion: >-
+    No machine-readable API contract (OpenAPI, Swagger, GraphQL SDL, AsyncAPI, MCP
+    tools/list, or A2A agent card) was found on any Tidal Vision host. Tidal Vision is
+    a chitosan biomaterials manufacturer with a WordPress marketing site and no public
+    developer program.
+x-evidence:
+  fetched: '2026-08-02'
+  robots_txt: {url: 'https://tidalvision.com/robots.txt', status: 200}
+  platform: WordPress (Yoast SEO) behind Cloudflare
